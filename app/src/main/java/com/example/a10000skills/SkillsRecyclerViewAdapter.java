@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a10000skills.data.SkillEntity;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyclerViewAdapter.ViewHolder> {
@@ -39,9 +42,7 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
 
     @Override
     public void onBindViewHolder(SkillsRecyclerViewAdapter.ViewHolder holder, int position) {
-        //holder.chatName.setText(items.get(position).getChatName());
-        //holder.chatText.setText(items.get(position).getLastMessage());
-        //holder.chat_id = items.get(position).getId();
+        holder.skillName.setText(items.get(position).getSkillName();
     }
 
 
