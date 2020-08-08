@@ -42,7 +42,7 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
 
     @Override
     public void onBindViewHolder(SkillsRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.skillName.setText(items.get(position).getSkillName();
+        holder.skillName.setText(items.get(position).getSkillName());
     }
 
 
