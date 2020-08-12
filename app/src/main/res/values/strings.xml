@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">10000 Skills</string>
+    <string name="maim_title">%1$s skills</string>
 </resources>
