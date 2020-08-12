@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,7 +67,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onChatClick(int skill_id, int position) {
+        Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
 
+        Intent intent = new Intent(this, SkillActivity.class);
+        intent.putExtra("REQUESTED_SKILL", skill_id);
+        startActivity(intent);
     }
 
     public void btnAddSkill(View v) {
