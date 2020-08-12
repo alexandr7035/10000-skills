@@ -43,6 +43,7 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
     @Override
     public void onBindViewHolder(SkillsRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.skillName.setText(items.get(position).getSkillName());
+        holder.skillHours.setText(String.valueOf(items.get(position).getSkillHours()));
     }
 
 
@@ -50,12 +51,14 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
             implements View.OnClickListener {
 
         public TextView skillName;
+        public TextView skillHours;
         int skill_id;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             skillName = itemView.findViewById(R.id.skillName);
+            skillHours = itemView.findViewById(R.id.skillHours);
 
             itemView.setOnClickListener(this);
         }

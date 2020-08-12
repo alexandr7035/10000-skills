@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp">
 
@@ -26,6 +27,15 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:textSize="@dimen/skill_view_name_size_f"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/skillHours"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textSize="@dimen/skill_view_hours_size_f"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="skill_view_height">70dp</dimen>
     <dimen name="skill_view_name_size_f">18sp</dimen>
+    <dimen name="skill_view_hours_size_f">18sp</dimen>
     <dimen name="toolbar_text_size">22dp</dimen>
 
     <dimen name="skill_view_corner_radius">5dp</dimen>
