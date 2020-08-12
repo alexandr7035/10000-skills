@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item  android:state_pressed="true">
+        <shape>
+            <corners
+                android:bottomRightRadius="@dimen/skill_view_corner_radius"
+                android:bottomLeftRadius="@dimen/skill_view_corner_radius"
+                android:topLeftRadius="@dimen/skill_view_corner_radius"
+                android:topRightRadius="@dimen/skill_view_corner_radius" />
+            <solid android:color="@color/color_skill_view_pressed"/>
+        </shape>
+    </item>
+
+    <item android:state_focused="true" >
+        <shape>
+            <corners
+                android:bottomRightRadius="@dimen/skill_view_corner_radius"
+                android:bottomLeftRadius="@dimen/skill_view_corner_radius"
+                android:topLeftRadius="@dimen/skill_view_corner_radius"
+                android:topRightRadius="@dimen/skill_view_corner_radius" />
+            <solid android:color="@color/color_skill_view_pressed"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <corners
+                android:bottomRightRadius="@dimen/skill_view_corner_radius"
+                android:bottomLeftRadius="@dimen/skill_view_corner_radius"
+                android:topLeftRadius="@dimen/skill_view_corner_radius"
+                android:topRightRadius="@dimen/skill_view_corner_radius" />
+            <solid android:color="@color/color_skill_view"/>
+        </shape>
+    </item>
+</selector>

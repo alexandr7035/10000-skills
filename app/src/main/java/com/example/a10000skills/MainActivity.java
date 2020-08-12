@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         recyclerViewAdapter = new SkillsRecyclerViewAdapter(this);
         recyclerView.setAdapter(recyclerViewAdapter);
         // Divider for items
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         // Views
         titleView = findViewById(R.id.toolbarTitleView);
