@@ -12,7 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.a10000skills.data.SkillEntity;
@@ -21,7 +23,8 @@ import com.example.a10000skills.viewmodel.SkillViewModelFactory;
 
 import java.util.List;
 
-public class SkillActivity extends AppCompatActivity {
+public class SkillActivity extends AppCompatActivity
+                            implements Toolbar.OnMenuItemClickListener {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
@@ -45,10 +48,9 @@ public class SkillActivity extends AppCompatActivity {
         // Views
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbar.inflateMenu(R.menu.toolbar_menu_skill_activity);
+        toolbar.setOnMenuItemClickListener(this);
         skillHoursView = findViewById(R.id.skillHoursView);
-        // FIXME
-        toolbarTitle.setText("Skill 1");
-
 
 
         // Close activity on navigation btn click
@@ -73,9 +75,9 @@ public class SkillActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable SkillEntity skill) {
                         skillHoursView.setText(String.valueOf(skill.getSkillHours()));
+                        toolbarTitle.setText(skill.getSkillName());
                     }
         });
-
 
         // Vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -94,7 +96,8 @@ public class SkillActivity extends AppCompatActivity {
         SkillEntity skill_data;
         skill_data = skill.getValue();
 
-        if (skill_data.getSkillHours() == 0){
+        if (skill_data.getSkillHours() == 0) {
+            // Hours can't be lower than 0
             vibrator.vibrate(100);
         }
         else {
@@ -103,4 +106,27 @@ public class SkillActivity extends AppCompatActivity {
             viewModel.updateSkill(skill_data);
         }
     }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_title_edit_skill:
+
+                if (toolbarTitle.getVisibility() == View.VISIBLE) {
+
+                    toolbarTitle.setVisibility(View.GONE);
+                    item.setIcon(R.drawable.ic_checkmark);
+
+                }
+                else {
+                    toolbarTitle.setVisibility(View.VISIBLE);
+                    item.setIcon(R.drawable.ic_edit);
+                }
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
