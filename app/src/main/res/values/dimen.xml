@@ -6,4 +6,11 @@
     <dimen name="toolbar_text_size">22dp</dimen>
 
     <dimen name="skill_view_corner_radius">5dp</dimen>
+
+    <dimen name="skill_hours_field_height">200dp</dimen>
+    <dimen name="skill_hours_field_text_size">100dp</dimen>
+    <dimen name="skill_hours_btn_text_size">50dp</dimen>
+    <dimen name="skill_hours_field_radius">5dp</dimen>
+    <dimen name="skill_hours_btn_radius">5dp</dimen>
+    <dimen name="skill_hours_btn_height">100dp</dimen>
 </resources>

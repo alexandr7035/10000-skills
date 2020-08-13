@@ -5,4 +5,11 @@
     <color name="colorAccent">#D5603B</color>
     <color name="color_skill_view">#E0DDD2</color>
     <color name="color_skill_view_pressed">#A7A59E</color>
+
+    <color name="color_toolbar_title">#FFFFFF</color>
+
+    <color name="color_skill_hours_field">#F7F3B1</color>
+
+    <color name="color_skill_hour_change_btn">#F7F3B1</color>
+    <color name="color_skill_hour_change_btn_pressed">#CFCCA2</color>
 </resources>

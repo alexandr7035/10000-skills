@@ -44,6 +44,7 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
     public void onBindViewHolder(SkillsRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.skillName.setText(items.get(position).getSkillName());
         holder.skillHours.setText(String.valueOf(items.get(position).getSkillHours()));
+        holder.skill_id = items.get(position).getId();
     }
 
 

@@ -21,6 +21,9 @@ public interface SkillsDao {
     @Query("SELECT * FROM skills WHERE id = (:id)")
     SkillEntity getSkillById(int id);
 
+    @Query("SELECT * FROM skills WHERE id = (:id)")
+    LiveData<SkillEntity> getSkillById_LD(int id);
+
     @Insert
     void insert(SkillEntity skillEntity);
 

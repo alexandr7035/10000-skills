@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners
+                android:bottomRightRadius="@dimen/skill_hours_field_radius"
+                android:bottomLeftRadius="@dimen/skill_hours_field_radius"
+                android:topLeftRadius="@dimen/skill_hours_field_radius"
+                android:topRightRadius="@dimen/skill_hours_field_radius" />
+            <solid android:color="@color/color_skill_hours_field"/>
+</shape>
+
