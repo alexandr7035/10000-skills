@@ -21,11 +21,8 @@
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
 
-            <TextView
+        <TextView
                 android:id="@+id/toolbarTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -33,7 +30,14 @@
                 android:textSize="@dimen/toolbar_text_size"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+        <EditText
+            android:id="@+id/toolbarEditTitleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:visibility="gone"
+            android:hint="@string/edit_skill_title_hint_text">
+        </EditText>
 
 
     </androidx.appcompat.widget.Toolbar>

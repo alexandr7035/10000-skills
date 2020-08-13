@@ -29,6 +29,7 @@ public class SkillActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private TextView skillHoursView;
+    private EditText editTitleView;
 
     private SkillViewModel viewModel;
 
@@ -48,6 +49,7 @@ public class SkillActivity extends AppCompatActivity
         // Views
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbarTitle);
+        editTitleView = findViewById(R.id.toolbarEditTitleView);
         toolbar.inflateMenu(R.menu.toolbar_menu_skill_activity);
         toolbar.setOnMenuItemClickListener(this);
         skillHoursView = findViewById(R.id.skillHoursView);
@@ -113,15 +115,27 @@ public class SkillActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.menu_title_edit_skill:
 
+                SkillEntity skill_data;
+                skill_data = skill.getValue();
+
                 if (toolbarTitle.getVisibility() == View.VISIBLE) {
 
                     toolbarTitle.setVisibility(View.GONE);
+                    editTitleView.setVisibility(View.VISIBLE);
                     item.setIcon(R.drawable.ic_checkmark);
+
+                    editTitleView.setText(skill_data.getSkillName());
 
                 }
                 else {
                     toolbarTitle.setVisibility(View.VISIBLE);
+                    editTitleView.setVisibility(View.GONE);
                     item.setIcon(R.drawable.ic_edit);
+
+                    // Update skill's name
+                    skill_data.setSkillName(editTitleView.getText().toString());
+                    viewModel.updateSkill(skill_data);
+
                 }
 
             default:
