@@ -27,7 +27,9 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:textSize="@dimen/skill_view_name_size_f"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/skillHours"
