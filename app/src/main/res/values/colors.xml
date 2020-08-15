@@ -12,4 +12,8 @@
 
     <color name="color_skill_hour_change_btn">#F7F3B1</color>
     <color name="color_skill_hour_change_btn_pressed">#CFCCA2</color>
+
+    <color name="color_new_skill_dialog_background">#F7F3B1</color>
+    <color name="color_new_skill_dialog_btn">#F7F3B1</color>
+    <color name="color_new_skill_dialog_btn_pressed">#EBE68F</color>
 </resources>

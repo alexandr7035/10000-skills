@@ -1,6 +1,7 @@
 package com.example.a10000skills;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -9,15 +10,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.a10000skills.data.SkillEntity;
 import com.example.a10000skills.viewmodel.MainViewModel;
 import com.example.a10000skills.viewmodel.MainViewModelFactory;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private LiveData<List<SkillEntity>> skillsListLiveData;
 
     private TextView titleView;
+
 
     private final String LOG_TAG = "DEBUG_10000";
 
@@ -82,6 +89,49 @@ public class MainActivity extends AppCompatActivity
 
     public void btnAddSkill(View v) {
         Log.d(LOG_TAG, "add skill btn pressed");
-        viewModel.addSkill(new SkillEntity("skill1"));
+
+        // Creating "new skill" dialog
+       AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+       // Use custom layout for dialog
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_create_skill, null);
+        builder.setView(dialogView);
+
+        // Disable canceling on touching outside
+        builder.setCancelable(false);
+
+        // Make final to use in inner class
+        final AlertDialog dialog = builder.create();
+
+        // Create button (textview)
+        TextView createBtn = dialogView.findViewById(R.id.createBtn);
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Get skill name
+                EditText skillNameField = dialogView.findViewById(R.id.skillNameField);
+                String skillName = skillNameField.getText().toString();
+
+                // Create skill
+                SkillEntity newSkill = new SkillEntity(skillName);
+                viewModel.addSkill(newSkill);
+
+                dialog.dismiss();
+            }
+        });
+
+        // Cancel button (textview)
+        TextView cancelBtn = dialogView.findViewById(R.id.cancelBtn);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // Show dialog
+        dialog.show();
     }
 }
