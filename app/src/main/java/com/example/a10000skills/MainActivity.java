@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,12 +21,11 @@ import com.example.a10000skills.data.SkillEntity;
 import com.example.a10000skills.viewmodel.MainViewModel;
 import com.example.a10000skills.viewmodel.MainViewModelFactory;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-                          implements SkillsRecyclerViewAdapter.SkillClickListener {
+                          implements SkillsRecyclerViewAdapter.SkillClickListener,
+                                        SkillsRecyclerViewAdapter.SkillLongClickListener {
 
     private RecyclerView recyclerView;
     private SkillsRecyclerViewAdapter recyclerViewAdapter;
@@ -48,7 +45,8 @@ public class MainActivity extends AppCompatActivity
         // RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewAdapter = new SkillsRecyclerViewAdapter(this);
+        // Pass clicklisteners to recyclerview adapter
+        recyclerViewAdapter = new SkillsRecyclerViewAdapter(this, this);
         recyclerView.setAdapter(recyclerViewAdapter);
         // Divider for items
         //recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
@@ -77,14 +75,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onSkillClick(int skill_id, int position) {
-        Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
-
-        Intent intent = new Intent(this, SkillActivity.class);
-        intent.putExtra("REQUESTED_SKILL", skill_id);
-        startActivity(intent);
-    }
 
     public void btnAddSkill(View v) {
         Log.d(LOG_TAG, "add skill btn pressed");
@@ -132,5 +122,20 @@ public class MainActivity extends AppCompatActivity
 
         // Show dialog
         dialog.show();
+    }
+
+
+    @Override
+    public void onSkillClick(int skill_id, int position) {
+        Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
+
+        Intent intent = new Intent(this, SkillActivity.class);
+        intent.putExtra("REQUESTED_SKILL", skill_id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLongSkillClick(int skill_id, int position){
+        Log.d(LOG_TAG, "clicked (LONG) position " + position + " id " + skill_id);
     }
 }

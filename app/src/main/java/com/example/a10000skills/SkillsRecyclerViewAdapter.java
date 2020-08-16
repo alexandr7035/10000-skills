@@ -17,10 +17,13 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
 
     private List<SkillEntity> items;
     private SkillClickListener skillClickListener;
+    private SkillLongClickListener skillLongClickListener;
 
-    public SkillsRecyclerViewAdapter(SkillClickListener skillClickListener) {
+    public SkillsRecyclerViewAdapter(SkillClickListener skillClickListener,
+                                     SkillLongClickListener skillLongClickListener) {
         this.items = new ArrayList<>();
         this.skillClickListener = skillClickListener;
+        this.skillLongClickListener = skillLongClickListener;
     }
 
     public void setItems(List<SkillEntity> items) {
@@ -49,7 +52,7 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
 
 
     public class ViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener {
+            implements View.OnClickListener, View.OnLongClickListener {
 
         public TextView skillName;
         public TextView skillHours;
@@ -62,16 +65,27 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
             skillHours = itemView.findViewById(R.id.skillHours);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             skillClickListener.onSkillClick(skill_id, getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            skillLongClickListener.onLongSkillClick(skill_id, getAdapterPosition());
+            return true;
+        }
     }
 
     public interface SkillClickListener {
         void onSkillClick(int skill_id, int position);
+    }
+
+    public interface SkillLongClickListener {
+        void onLongSkillClick(int skill_id, int position);
     }
 
 }
