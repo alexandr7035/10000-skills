@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +21,9 @@ import android.widget.TextView;
 import com.example.a10000skills.data.SkillEntity;
 import com.example.a10000skills.viewmodel.MainViewModel;
 import com.example.a10000skills.viewmodel.MainViewModelFactory;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -32,8 +35,14 @@ public class MainActivity extends AppCompatActivity
     private MainViewModel viewModel;
     private LiveData<List<SkillEntity>> skillsListLiveData;
 
+    private MutableLiveData<List<SkillEntity>> selectedSkillsLData;
+
     private TextView titleView;
 
+    private List<SkillEntity> selectedItems;
+
+    private FloatingActionButton addSkillBtn;
+    private FloatingActionButton deleteSkillsBtn;
 
     private final String LOG_TAG = "DEBUG_10000";
 
@@ -53,10 +62,18 @@ public class MainActivity extends AppCompatActivity
 
         // Views
         titleView = findViewById(R.id.toolbarTitleView);
+        addSkillBtn = findViewById(R.id.addSkillBtn);
+        deleteSkillsBtn = findViewById(R.id.deleteSkillsBtn);
+        deleteSkillsBtn.hide();
 
         // ViewModel & LiveData
         viewModel = new ViewModelProvider(this, new MainViewModelFactory(this.getApplication())).get(MainViewModel.class);
         skillsListLiveData = viewModel.getSkills();
+
+        selectedSkillsLData = viewModel.getSelectedSkillsLData();
+
+        selectedItems = new ArrayList<>();
+
 
 
         // Update RecyclerView when chats are changed
@@ -69,6 +86,31 @@ public class MainActivity extends AppCompatActivity
                     if (! skills.isEmpty()) {
                         recyclerViewAdapter.setItems(skills);
                     }
+                }
+            }
+        });
+
+
+        // Obsrver for selected items
+        selectedSkillsLData.observe(this, new Observer<List<SkillEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<SkillEntity> skills) {
+
+                if (skills != null) {
+
+                    if (! skills.isEmpty()) {
+                        Log.d(LOG_TAG, "some items are selected: " + skills);
+
+                        addSkillBtn.hide();
+                        deleteSkillsBtn.show();
+
+                    } else {
+                        Log.d(LOG_TAG, "no items selected now");
+
+                        deleteSkillsBtn.hide();
+                        addSkillBtn.show();
+                    }
+
                 }
             }
         });
@@ -137,5 +179,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLongSkillClick(int skill_id, int position){
         Log.d(LOG_TAG, "clicked (LONG) position " + position + " id " + skill_id);
+
+        recyclerViewAdapter.selectItem(position);
+        selectedSkillsLData.postValue(recyclerViewAdapter.getSelectedItems());
+
+        Log.d(LOG_TAG, selectedSkillsLData.getValue().toString());
     }
+
+    
+
+
 }

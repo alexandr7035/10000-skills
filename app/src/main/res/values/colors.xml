@@ -3,8 +3,10 @@
     <color name="colorPrimary">#FF6E40</color>
     <color name="colorPrimaryDark">#B15031</color>
     <color name="colorAccent">#D5603B</color>
+
     <color name="color_skill_view">#E0DDD2</color>
     <color name="color_skill_view_pressed">#A7A59E</color>
+    <color name="color_skill_view_selected">#BD7070</color>
 
     <color name="color_toolbar_title">#FFFFFF</color>
 

@@ -1,5 +1,6 @@
 package com.example.a10000skills;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,14 @@ import java.util.List;
 public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyclerViewAdapter.ViewHolder> {
 
     private List<SkillEntity> items;
+    private List<SkillEntity> selectedItems;
     private SkillClickListener skillClickListener;
     private SkillLongClickListener skillLongClickListener;
 
     public SkillsRecyclerViewAdapter(SkillClickListener skillClickListener,
                                      SkillLongClickListener skillLongClickListener) {
         this.items = new ArrayList<>();
+        this.selectedItems = new ArrayList<>();
         this.skillClickListener = skillClickListener;
         this.skillLongClickListener = skillLongClickListener;
     }
@@ -37,6 +40,26 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
         return items.size();
     }
 
+    public boolean checkIfItemSelected(int position) {
+        return selectedItems.contains(items.get(position));
+    }
+
+    public void selectItem(int position) {
+        if (! checkIfItemSelected(position)) {
+            selectedItems.add(items.get(position));
+            notifyDataSetChanged();
+        }
+    }
+
+    public void unselectItem(int position) {
+        selectedItems.remove(items.get(position));
+        notifyDataSetChanged();
+    }
+
+    public List<SkillEntity> getSelectedItems() {
+        return selectedItems;
+    }
+
     @Override
     public SkillsRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_skill, parent,false);
@@ -45,9 +68,18 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
 
     @Override
     public void onBindViewHolder(SkillsRecyclerViewAdapter.ViewHolder holder, int position) {
+
+
         holder.skillName.setText(items.get(position).getSkillName());
         holder.skillHours.setText(String.valueOf(items.get(position).getSkillHours()));
         holder.skill_id = items.get(position).getId();
+
+        if (checkIfItemSelected(position)) {
+            holder.itemView.setBackgroundResource(R.drawable.background_view_skill_selected);
+        }
+        else {
+            holder.itemView.setBackgroundResource(R.drawable.background_view_skill);
+        }
     }
 
 
