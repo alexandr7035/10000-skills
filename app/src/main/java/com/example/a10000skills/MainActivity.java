@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity
 
                     if (! skills.isEmpty()) {
                         recyclerViewAdapter.setItems(skills);
-                        titleView.setText(getString(R.string.maim_title, skills.size()));
                     }
                 }
             }
