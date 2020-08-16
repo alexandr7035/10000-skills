@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onChatClick(int skill_id, int position) {
+    public void onSkillClick(int skill_id, int position) {
         Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
 
         Intent intent = new Intent(this, SkillActivity.class);

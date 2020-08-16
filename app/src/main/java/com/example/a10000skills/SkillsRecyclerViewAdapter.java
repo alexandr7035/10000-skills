@@ -66,12 +66,12 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
 
         @Override
         public void onClick(View v) {
-            skillClickListener.onChatClick(skill_id, getAdapterPosition());
+            skillClickListener.onSkillClick(skill_id, getAdapterPosition());
         }
     }
 
     public interface SkillClickListener {
-        void onChatClick(int skill_id, int position);
+        void onSkillClick(int skill_id, int position);
     }
 
 }
