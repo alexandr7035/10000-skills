@@ -21,12 +21,9 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
     private SkillClickListener skillClickListener;
     private SkillLongClickListener skillLongClickListener;
 
-    public SkillsRecyclerViewAdapter(SkillClickListener skillClickListener,
-                                     SkillLongClickListener skillLongClickListener) {
+    public SkillsRecyclerViewAdapter() {
         this.items = new ArrayList<>();
         this.selectedItems = new ArrayList<>();
-        this.skillClickListener = skillClickListener;
-        this.skillLongClickListener = skillLongClickListener;
     }
 
     public void setItems(List<SkillEntity> items) {

@@ -26,9 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-                          implements SkillsRecyclerViewAdapter.SkillClickListener,
-                                        SkillsRecyclerViewAdapter.SkillLongClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SkillsRecyclerViewAdapter recyclerViewAdapter;
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton addSkillBtn;
     private FloatingActionButton deleteSkillsBtn;
 
+    private DefaultClickListener defaultClickListener;
     private SelectionClickListener selectionClickListener;
 
     private final String LOG_TAG = "DEBUG_10000";
@@ -53,14 +52,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Click listeners for recyclerview items
+        selectionClickListener = new SelectionClickListener();
+        defaultClickListener = new DefaultClickListener();
+
         // RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // Pass clicklisteners to recyclerview adapter
-        recyclerViewAdapter = new SkillsRecyclerViewAdapter(this, this);
+        recyclerViewAdapter = new SkillsRecyclerViewAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
-        // Divider for items
-        //recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        // Set default click listeners
+        recyclerViewAdapter.setItemClickListener(defaultClickListener);
+        recyclerViewAdapter.setItemLongClickListener(defaultClickListener);
 
         // Views
         titleView = findViewById(R.id.toolbarTitleView);
@@ -75,7 +79,6 @@ public class MainActivity extends AppCompatActivity
         selectedSkillsLData = viewModel.getSelectedSkillsLData();
 
         selectedItems = new ArrayList<>();
-        selectionClickListener = new SelectionClickListener();
 
 
 
@@ -117,8 +120,8 @@ public class MainActivity extends AppCompatActivity
                         deleteSkillsBtn.hide();
                         addSkillBtn.show();
 
-                        recyclerViewAdapter.setItemClickListener(MainActivity.this);
-                        recyclerViewAdapter.setItemLongClickListener(MainActivity.this);
+                        recyclerViewAdapter.setItemClickListener(defaultClickListener);
+                        recyclerViewAdapter.setItemLongClickListener(defaultClickListener);
 
                     }
 
@@ -178,29 +181,35 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onSkillClick(int skill_id, int position) {
-        Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
 
-        Intent intent = new Intent(this, SkillActivity.class);
-        intent.putExtra("REQUESTED_SKILL", skill_id);
-        startActivity(intent);
+    // Default click listener for recyclerview items
+    class DefaultClickListener implements SkillsRecyclerViewAdapter.SkillClickListener,
+                                             SkillsRecyclerViewAdapter.SkillLongClickListener {
+
+
+        @Override
+        public void onSkillClick(int skill_id, int position) {
+            Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
+
+            Intent intent = new Intent(MainActivity.this, SkillActivity.class);
+            intent.putExtra("REQUESTED_SKILL", skill_id);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onLongSkillClick(int skill_id, int position) {
+            Log.d(LOG_TAG, "clicked (LONG) position " + position + " id " + skill_id);
+
+            recyclerViewAdapter.selectItem(position);
+            selectedSkillsLData.postValue(recyclerViewAdapter.getSelectedItems());
+
+            Log.d(LOG_TAG, selectedSkillsLData.getValue().toString());
+        }
     }
-
-    @Override
-    public void onLongSkillClick(int skill_id, int position){
-        Log.d(LOG_TAG, "clicked (LONG) position " + position + " id " + skill_id);
-
-        recyclerViewAdapter.selectItem(position);
-        selectedSkillsLData.postValue(recyclerViewAdapter.getSelectedItems());
-
-        Log.d(LOG_TAG, selectedSkillsLData.getValue().toString());
-    }
-
 
 
     // Set if at least one item in RecyclerView is selected
-    // Replace by default click listener (MainActivity) when no items selected
+    // Replace by default click listener when no items selected
     class SelectionClickListener implements SkillsRecyclerViewAdapter.SkillClickListener,
                                              SkillsRecyclerViewAdapter.SkillLongClickListener {
 
