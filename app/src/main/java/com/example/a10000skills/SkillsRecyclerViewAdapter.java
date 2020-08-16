@@ -120,4 +120,15 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
         void onLongSkillClick(int skill_id, int position);
     }
 
+
+    // Allows to change click listener
+    // For simple selection implementation
+    public void setItemClickListener(SkillClickListener skillClickListener) {
+        this.skillClickListener = skillClickListener;
+    }
+
+    public void setItemLongClickListener(SkillLongClickListener skillLongClickListener) {
+        this.skillLongClickListener = skillLongClickListener;
+    }
+
 }

@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton addSkillBtn;
     private FloatingActionButton deleteSkillsBtn;
 
+    private SelectionClickListener selectionClickListener;
+
     private final String LOG_TAG = "DEBUG_10000";
 
     @Override
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         selectedSkillsLData = viewModel.getSelectedSkillsLData();
 
         selectedItems = new ArrayList<>();
+        selectionClickListener = new SelectionClickListener();
 
 
 
@@ -104,11 +107,19 @@ public class MainActivity extends AppCompatActivity
                         addSkillBtn.hide();
                         deleteSkillsBtn.show();
 
+                        recyclerViewAdapter.setItemClickListener(selectionClickListener);
+                        recyclerViewAdapter.setItemLongClickListener(selectionClickListener);
+
+
                     } else {
                         Log.d(LOG_TAG, "no items selected now");
 
                         deleteSkillsBtn.hide();
                         addSkillBtn.show();
+
+                        recyclerViewAdapter.setItemClickListener(MainActivity.this);
+                        recyclerViewAdapter.setItemLongClickListener(MainActivity.this);
+
                     }
 
                 }
@@ -186,7 +197,41 @@ public class MainActivity extends AppCompatActivity
         Log.d(LOG_TAG, selectedSkillsLData.getValue().toString());
     }
 
-    
+
+
+    // Set if at least one item in RecyclerView is selected
+    // Replace by default click listener (MainActivity) when no items selected
+    class SelectionClickListener implements SkillsRecyclerViewAdapter.SkillClickListener,
+                                             SkillsRecyclerViewAdapter.SkillLongClickListener {
+
+
+        @Override
+        public void onSkillClick(int skill_id, int position) {
+            Log.d(LOG_TAG, "SELECTED_CL: click item " + position + " skill_id " + skill_id);
+
+            // Select item if not selected
+            // Else unselect
+
+            if (recyclerViewAdapter.checkIfItemSelected(position)) {
+                recyclerViewAdapter.unselectItem(position);
+            }
+            else {
+                recyclerViewAdapter.selectItem(position);
+            }
+
+            // Update livedata
+            selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
+
+        }
+
+        @Override
+        public void onLongSkillClick(int skill_id, int position) {
+            Log.d(LOG_TAG, "SELECTED_CL: LONG click item " + position + " skill_id " + skill_id);
+
+            // Do nothing
+            // May be changed later
+        }
+    }
 
 
 }
