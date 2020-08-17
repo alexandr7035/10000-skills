@@ -25,7 +25,7 @@ public class SkillsRepository {
         // To run background tasks
         executor = Executors.newSingleThreadExecutor();
 
-        // Livedata chats' list
+        // Livedata skills' list
         skillsList = skillsDao.getSkills();
     }
 

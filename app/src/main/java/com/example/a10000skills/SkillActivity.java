@@ -72,7 +72,7 @@ public class SkillActivity extends AppCompatActivity
         viewModel = new ViewModelProvider(this, new SkillViewModelFactory(this.getApplication(), skill_id)).get(SkillViewModel.class);
         skill = viewModel.getSkillLData();
 
-        // Update RecyclerView when chats are changed
+        // Update UI when skill changed
         skill.observe(this, new Observer<SkillEntity>() {
             @Override
             public void onChanged(@Nullable SkillEntity skill) {

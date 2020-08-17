@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         // Vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        // Update RecyclerView when chats are changed
+        // Update RecyclerView when skills' list changed
         skillsListLiveData.observe(this, new Observer<List<SkillEntity>>() {
             @Override
             public void onChanged(@Nullable List<SkillEntity> skills) {
