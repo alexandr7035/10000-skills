@@ -10,12 +10,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -175,6 +177,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // Cancel dialog on back key pressed
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface di, int keyCode,
+                                 KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    // Cancel dialog
+                    dialog.dismiss();
+                }
+                return false;
+            }
+        });
+        
+
         // Show dialog
         dialog.show();
     }
@@ -210,8 +227,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Build dialog
+        final AlertDialog dialog = builder.create();
 
-        AlertDialog dialog = builder.create();
+        // Cancel dialog on back key pressed
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface di, int keyCode,
+                                 KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    // Clear selection
+                    recyclerViewAdapter.clearSelection();
+                    selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
+                    // Cancel dialog
+                    dialog.dismiss();
+                }
+                return false;
+            }
+        });
+
 
         dialog.show();
 
