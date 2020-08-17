@@ -68,4 +68,13 @@ public class SkillsRepository {
             }
         });
     }
+
+    public void deleteSkillFromDb(final SkillEntity skill) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                skillsDao.deleteSkill(skill);
+            }
+        });
+    }
 }

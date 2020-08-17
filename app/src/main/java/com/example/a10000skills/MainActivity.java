@@ -10,8 +10,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView titleView;
 
-    private List<SkillEntity> selectedItems;
-
     private FloatingActionButton addSkillBtn;
     private FloatingActionButton deleteSkillsBtn;
 
     private DefaultClickListener defaultClickListener;
     private SelectionClickListener selectionClickListener;
+
+    private Vibrator vibrator;
 
     private final String LOG_TAG = "DEBUG_10000";
 
@@ -78,9 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         selectedSkillsLData = viewModel.getSelectedSkillsLData();
 
-        selectedItems = new ArrayList<>();
-
-
+        // Vibrator
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // Update RecyclerView when chats are changed
         skillsListLiveData.observe(this, new Observer<List<SkillEntity>>() {
@@ -88,11 +90,8 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SkillEntity> skills) {
 
                 if (skills != null) {
-
-                    if (! skills.isEmpty()) {
                         recyclerViewAdapter.setItems(skills);
                     }
-                }
             }
         });
 
@@ -178,6 +177,44 @@ public class MainActivity extends AppCompatActivity {
 
         // Show dialog
         dialog.show();
+    }
+
+
+    // Shows dialog to delete skills
+    public void btnDeleteSkill(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.delete_skill_dialog_delete, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                // Delete selected skills
+                for (SkillEntity skill : recyclerViewAdapter.getSelectedItems()) {
+                    viewModel.deleteSkill(skill);
+                }
+
+                // Clear selection
+                recyclerViewAdapter.clearSelection();
+                selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
+
+                vibrator.vibrate(100);
+
+            }
+        });
+
+        builder.setNegativeButton(R.string.delete_skill_dialog_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                recyclerViewAdapter.clearSelection();
+                selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
+
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
     }
 
 

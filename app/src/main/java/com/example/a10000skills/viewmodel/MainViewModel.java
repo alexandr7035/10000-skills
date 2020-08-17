@@ -36,6 +36,10 @@ public class MainViewModel extends ViewModel {
         repository.addSkillToDb(skill);
     }
 
+    public void deleteSkill(SkillEntity skill) {
+        repository.deleteSkillFromDb(skill);
+    }
+
     public MutableLiveData<List<SkillEntity>> getSelectedSkillsLData() {
         return selectedSkillsLData;
     }

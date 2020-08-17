@@ -10,4 +10,8 @@
     <string name="new_skill_dialog_title">Создать скилл</string>
     <string name="new_skill_dialog_create">Создать</string>
     <string name="new_skill_dialog_cancel">Отмена</string>
+
+    <string name="delete_skill_dialog_delete">Удалить</string>
+    <string name="delete_skill_dialog_cancel">Отмена</string>
+
 </resources>
