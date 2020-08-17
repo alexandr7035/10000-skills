@@ -218,6 +218,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Override onBackPressed method
+    // Clear selection if any item selected
+    @Override
+    public void onBackPressed() {
+
+        if ( recyclerViewAdapter.checkIfAnyItemSelected()) {
+            recyclerViewAdapter.clearSelection();
+            selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
 
     // Default click listener for recyclerview items
     class DefaultClickListener implements SkillsRecyclerViewAdapter.SkillClickListener,
@@ -246,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Set if at least one item in RecyclerView is selected
-    // Replace by default click listener when no items selected
+    // Replaced by default click listener when no items selected
     class SelectionClickListener implements SkillsRecyclerViewAdapter.SkillClickListener,
                                              SkillsRecyclerViewAdapter.SkillLongClickListener {
 

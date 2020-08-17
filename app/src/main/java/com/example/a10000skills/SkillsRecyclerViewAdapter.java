@@ -57,6 +57,11 @@ public class SkillsRecyclerViewAdapter  extends RecyclerView.Adapter<SkillsRecyc
         return selectedItems;
     }
 
+    // Returns true if selectedItems list is not empty
+    public boolean checkIfAnyItemSelected() {
+        return selectedItems.size() > 0;
+    }
+
     public void clearSelection() {
         selectedItems.clear();
         notifyDataSetChanged();
