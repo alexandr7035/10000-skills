@@ -21,6 +21,7 @@
     <color name="color_new_skill_dialog_btn_pressed">#CDCDCD</color>
     <color name="color_new_skill_dialog_btn_text">@color/colorPrimaryDark</color>
     <color name="color_new_skill_dialog_input_border">@color/colorPrimaryDark</color>
+    <color name="color_new_skill_dialog_input_border_invalid">#E3131A</color>
 
     <color name="color_delete_skills_dialog_background">#FFFFFF</color>
     <color name="color_delete_skills_dialog_btn">#FFFFFF</color>

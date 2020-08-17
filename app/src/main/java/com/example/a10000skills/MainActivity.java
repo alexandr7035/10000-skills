@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.text.Html;
 import android.util.Log;
@@ -158,14 +159,43 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Get skill name
-                EditText skillNameField = dialogView.findViewById(R.id.skillNameField);
-                String skillName = skillNameField.getText().toString();
+                final EditText skillNameField = dialogView.findViewById(R.id.skillNameField);
+                // Trim the sring
+                String skillName = skillNameField.getText().toString().trim();
 
-                // Create skill
-                SkillEntity newSkill = new SkillEntity(skillName);
-                viewModel.addSkill(newSkill);
+                // Don't allow empty name
+                if (! skillName.equals("") ) {
+                    // Create skill
+                    SkillEntity newSkill = new SkillEntity(skillName);
+                    viewModel.addSkill(newSkill);
 
-                dialog.dismiss();
+                    dialog.dismiss();
+                }
+                else {
+
+                    // Set red border to edittext
+                    skillNameField.setBackgroundResource(R.drawable.background_new_skill_dialog_input_invalid);
+
+                    // Change to default after 1s
+                    new CountDownTimer(1000, 30) {
+
+                        @Override
+                        public void onTick(long arg0) {
+                            // TODO Auto-generated method stub
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            skillNameField.setBackgroundResource(R.drawable.background_new_skill_dialog_input);
+                        }
+                    }.start();
+
+                    // Set red border to edittext
+                    skillNameField.setBackgroundResource(R.drawable.background_new_skill_dialog_input_invalid);
+
+                    vibrator.vibrate(500);
+                }
+
             }
         });
 
