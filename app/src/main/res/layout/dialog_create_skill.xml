@@ -11,26 +11,20 @@
     android:paddingRight="10dp"
     android:paddingBottom="5dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/new_skill_dialog_title"
-        android:textColor="@color/color_new_skill_dialog_title"
-        android:textSize="@dimen/dialog_new_skill_title_text_size"
-        android:textStyle="bold" />
-
     <EditText
         android:id="@+id/skillNameField"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/background_new_skill_dialog_input"
         android:hint="@string/new_skill_dialog_hint"
         android:inputType="text"
         android:maxLines="1"
-        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:textSize="@dimen/dialog_new_skill_edittext_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

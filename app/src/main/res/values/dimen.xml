@@ -14,7 +14,6 @@
     <dimen name="skill_hours_btn_radius">5dp</dimen>
     <dimen name="skill_hours_btn_height">100dp</dimen>
 
-    <dimen name="dialog_new_skill_title_text_size">18sp</dimen>
     <dimen name="dialog_new_skill_button_text_size">18sp</dimen>
     <dimen name="dialog_new_skill_edittext_size">18sp</dimen>
 
