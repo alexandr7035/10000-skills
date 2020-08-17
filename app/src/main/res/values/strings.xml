@@ -13,5 +13,6 @@
 
     <string name="delete_skill_dialog_delete">Удалить</string>
     <string name="delete_skill_dialog_cancel">Отмена</string>
+    <string name="delete_skill_dialog_text"><![CDATA[<b>Удалить выделенные скиллы?</b> (%1$d)]]></string>
 
 </resources>

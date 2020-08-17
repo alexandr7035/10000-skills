@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_new_skill_dialog"
+    android:background="@color/color_new_skill_dialog_background"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
@@ -47,12 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:background="@drawable/background_new_skill_dialog_button"
+            android:background="@drawable/background_new_skill_dialog_btn"
             android:clickable="true"
             android:gravity="center_horizontal|center_vertical"
             android:padding="3dp"
             android:text="@string/new_skill_dialog_cancel"
-            android:textColor="@color/color_new_skill_dialog_text"
+            android:textColor="@color/color_new_skill_dialog_btn_text"
             android:textSize="@dimen/dialog_new_skill_button_text_size" />
 
         <TextView
@@ -61,12 +61,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:background="@drawable/background_new_skill_dialog_button"
+            android:background="@drawable/background_new_skill_dialog_btn"
             android:clickable="true"
             android:gravity="center_horizontal|center_vertical"
             android:padding="3dp"
             android:text="@string/new_skill_dialog_create"
-            android:textColor="@color/color_new_skill_dialog_text"
+            android:textColor="@color/color_new_skill_dialog_btn_text"
             android:textSize="@dimen/dialog_new_skill_button_text_size" />
 
     </LinearLayout>

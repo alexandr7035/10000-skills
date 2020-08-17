@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -201,9 +202,26 @@ public class MainActivity extends AppCompatActivity {
     public void btnDeleteSkill(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        // Add the buttons
-        builder.setPositiveButton(R.string.delete_skill_dialog_delete, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+        // Use custom layout for dialog
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_delete_skills, null);
+        builder.setView(dialogView);
+
+        TextView deleteTextView = dialogView.findViewById(R.id.deleteTextView);
+        deleteTextView.setText(Html.fromHtml(getString(R.string.delete_skill_dialog_text,
+                                recyclerViewAdapter.getSelectedItems().size())));
+
+        // Disable canceling on touching outside
+        builder.setCancelable(false);
+
+        // Make final to use in inner class
+        final AlertDialog dialog = builder.create();
+
+        // Create button (textview)
+        TextView deleteBtn = dialogView.findViewById(R.id.deleteBtn);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
                 // Delete selected skills
                 for (SkillEntity skill : recyclerViewAdapter.getSelectedItems()) {
@@ -214,21 +232,25 @@ public class MainActivity extends AppCompatActivity {
                 recyclerViewAdapter.clearSelection();
                 selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
 
+                dialog.dismiss();
+
                 vibrator.vibrate(100);
 
+
             }
         });
 
-        builder.setNegativeButton(R.string.delete_skill_dialog_cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+        // Create button (textview)
+        TextView camcelBtn = dialogView.findViewById(R.id.cancelBtn);
+        camcelBtn.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
                 recyclerViewAdapter.clearSelection();
                 selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
-
+                dialog.dismiss();
             }
         });
 
-        // Build dialog
-        final AlertDialog dialog = builder.create();
 
         // Cancel dialog on back key pressed
         dialog.setOnKeyListener(new Dialog.OnKeyListener() {
