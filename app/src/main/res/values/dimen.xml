@@ -16,5 +16,6 @@
 
     <dimen name="dialog_new_skill_title_text_size">18sp</dimen>
     <dimen name="dialog_new_skill_button_text_size">18sp</dimen>
+    <dimen name="dialog_new_skill_edittext_size">18sp</dimen>
 
 </resources>
