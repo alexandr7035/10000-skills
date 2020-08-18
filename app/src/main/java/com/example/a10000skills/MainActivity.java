@@ -1,15 +1,5 @@
 package com.example.a10000skills;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,14 +13,24 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a10000skills.data.SkillEntity;
 import com.example.a10000skills.viewmodel.MainViewModel;
 import com.example.a10000skills.viewmodel.MainViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private SelectionClickListener selectionClickListener;
 
     private Vibrator vibrator;
+
+    private LinearLayout deletedSkillsBar;
 
     private final String LOG_TAG = "DEBUG_10000";
 
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         addSkillBtn = findViewById(R.id.addSkillBtn);
         deleteSkillsBtn = findViewById(R.id.deleteSkillsBtn);
         deleteSkillsBtn.hide();
+        deletedSkillsBar = findViewById(R.id.deletedSkillsBar);
 
         // ViewModel & LiveData
         viewModel = new ViewModelProvider(this, new MainViewModelFactory(this.getApplication())).get(MainViewModel.class);
@@ -237,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.dialog_delete_skills, null);
         builder.setView(dialogView);
 
-        TextView deleteTextView = dialogView.findViewById(R.id.deleteTextView);
+        final TextView deleteTextView = dialogView.findViewById(R.id.deleteTextView);
         deleteTextView.setText(Html.fromHtml(getString(R.string.delete_skill_dialog_text,
                                 recyclerViewAdapter.getSelectedItems().size())));
 
@@ -258,6 +261,11 @@ public class MainActivity extends AppCompatActivity {
                     viewModel.deleteSkill(skill);
                 }
 
+                // Prepare custom bar (show after deleting)
+                TextView deletedSkillsBarTextView = deletedSkillsBar.findViewById(R.id.deletedSkillsBarTextView);
+                deletedSkillsBarTextView.setText(getString(R.string.delete_skills_bar_text,
+                        recyclerViewAdapter.getSelectedItems().size()));
+
                 // Clear selection
                 recyclerViewAdapter.clearSelection();
                 selectedSkillsLData.setValue(recyclerViewAdapter.getSelectedItems());
@@ -265,6 +273,21 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
 
                 vibrator.vibrate(100);
+
+                // Make deletedSkillsBar visible for 3 seconds and then hide
+                deletedSkillsBar.setVisibility(View.VISIBLE);
+                new CountDownTimer(3000, 30) {
+
+                    @Override
+                    public void onTick(long arg0) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        deletedSkillsBar.setVisibility(View.GONE);
+                    }
+                }.start();
 
 
             }

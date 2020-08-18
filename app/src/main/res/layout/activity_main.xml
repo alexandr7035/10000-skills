@@ -56,7 +56,7 @@
         android:layout_margin="10dp"
         android:clickable="true"
         android:onClick="btnAddSkill"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/deletedSkillsBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_plus" />
 
@@ -67,8 +67,38 @@
         android:layout_margin="10dp"
         android:clickable="true"
         android:onClick="btnDeleteSkill"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/deletedSkillsBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_delete" />
+
+    <LinearLayout
+        android:id="@+id/deletedSkillsBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/deleted_skills_bar_height"
+        android:layout_margin="10dp"
+        android:background="@color/color_delete_skills_bar_background"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/deletedSkillsBarTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:gravity="left|center_vertical"
+            android:textColor="@color/color_delete_skills_bar_text"
+            android:textSize="@dimen/deleted_skills_bar_text_size" />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

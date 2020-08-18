@@ -27,4 +27,7 @@
     <color name="color_delete_skills_dialog_btn_pressed">#CDCDCD</color>
     <color name="color_delete_skills_dialog_btn_text">@color/colorPrimaryDark</color>
 
+    <color name="color_delete_skills_bar_background">#363636</color>
+    <color name="color_delete_skills_bar_text">#FFFFFF</color>
+
 </resources>

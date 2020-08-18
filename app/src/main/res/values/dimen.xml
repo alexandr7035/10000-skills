@@ -20,4 +20,7 @@
     <dimen name="dialog_delete_skills_button_text_size">18sp</dimen>
     <dimen name="dialog_delete_skills_text_size">18sp</dimen>
 
+    <dimen name="deleted_skills_bar_height">45dp</dimen>
+    <dimen name="deleted_skills_bar_text_size">16sp</dimen>
+
 </resources>
