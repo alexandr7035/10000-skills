@@ -64,7 +64,7 @@ public class SkillActivity extends AppCompatActivity
         // Get skill id
         Intent intent = getIntent();
         skill_id = intent.getIntExtra("REQUESTED_SKILL", 0);
-        Log.d(LOG_TAG, "requested skill " + skill_id);
+        //Log.d(LOG_TAG, "requested skill " + skill_id);
 
         // ViewModel & Livedata
         viewModel = new ViewModelProvider(this, new SkillViewModelFactory(this.getApplication(), skill_id)).get(SkillViewModel.class);

@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 if (skills != null) {
 
                     if (! skills.isEmpty()) {
-                        Log.d(LOG_TAG, "some items are selected: " + skills);
+                        //Log.d(LOG_TAG, "some items are selected: " + skills);
 
                         addSkillBtn.hide();
                         deleteSkillsBtn.show();
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     } else {
-                        Log.d(LOG_TAG, "no items selected now");
+                        //Log.d(LOG_TAG, "no items selected now");
 
                         deleteSkillsBtn.hide();
                         addSkillBtn.show();
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void btnAddSkill(View v) {
-        Log.d(LOG_TAG, "add skill btn pressed");
+        //Log.d(LOG_TAG, "add skill btn pressed");
 
         // Creating "new skill" dialog
        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSkillClick(int skill_id, int position) {
-            Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
+            //Log.d(LOG_TAG, "clicked position " + position + " id " + skill_id);
 
             Intent intent = new Intent(MainActivity.this, SkillActivity.class);
             intent.putExtra("REQUESTED_SKILL", skill_id);
@@ -359,12 +359,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onLongSkillClick(int skill_id, int position) {
-            Log.d(LOG_TAG, "clicked (LONG) position " + position + " id " + skill_id);
+            //Log.d(LOG_TAG, "clicked (LONG) position " + position + " id " + skill_id);
 
             recyclerViewAdapter.selectItem(position);
             selectedSkillsLData.postValue(recyclerViewAdapter.getSelectedItems());
 
-            Log.d(LOG_TAG, selectedSkillsLData.getValue().toString());
+            //Log.d(LOG_TAG, selectedSkillsLData.getValue().toString());
         }
     }
 
@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onSkillClick(int skill_id, int position) {
-            Log.d(LOG_TAG, "SELECTED_CL: click item " + position + " skill_id " + skill_id);
+            //Log.d(LOG_TAG, "SELECTED_CL: click item " + position + " skill_id " + skill_id);
 
             // Select item if not selected
             // Else unselect
@@ -396,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onLongSkillClick(int skill_id, int position) {
-            Log.d(LOG_TAG, "SELECTED_CL: LONG click item " + position + " skill_id " + skill_id);
+            //Log.d(LOG_TAG, "SELECTED_CL: LONG click item " + position + " skill_id " + skill_id);
 
             // Do nothing
             // May be changed later
