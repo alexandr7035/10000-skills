@@ -1,4 +1,4 @@
-package com.example.a10000skills;
+package com.alexandr7035.skills10000;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +17,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.a10000skills.data.SkillEntity;
-import com.example.a10000skills.viewmodel.SkillViewModel;
-import com.example.a10000skills.viewmodel.SkillViewModelFactory;
-
-import java.util.List;
+import com.alexandr7035.skills10000.data.SkillEntity;
+import com.alexandr7035.skills10000.viewmodel.SkillViewModel;
+import com.alexandr7035.skills10000.viewmodel.SkillViewModelFactory;
 
 public class SkillActivity extends AppCompatActivity
                             implements Toolbar.OnMenuItemClickListener {

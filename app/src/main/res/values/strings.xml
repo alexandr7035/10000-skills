@@ -6,7 +6,7 @@
 
     <string name="menu_edit_skill_title">Изменить название</string>
     <string name="edit_skill_title_hint_text">Название</string>
-    
+
     <string name="new_skill_dialog_create">Создать</string>
     <string name="new_skill_dialog_cancel">Отмена</string>
     <string name="new_skill_dialog_hint">Название</string>

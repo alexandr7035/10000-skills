@@ -1,4 +1,4 @@
-package com.example.a10000skills.data;
+package com.alexandr7035.skills10000.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

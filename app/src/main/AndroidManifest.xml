@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.a10000skills">
+    package="com.alexandr7035.skills10000">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
 
@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SkillActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.alexandr7035.skills10000.SkillActivity"></activity>
+        <activity android:name="com.alexandr7035.skills10000.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

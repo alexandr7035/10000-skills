@@ -1,4 +1,4 @@
-package com.example.a10000skills.data;
+package com.alexandr7035.skills10000.data;
 
 import android.app.Application;
 
@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;

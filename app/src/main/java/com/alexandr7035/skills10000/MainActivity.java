@@ -1,4 +1,4 @@
-package com.example.a10000skills;
+package com.alexandr7035.skills10000;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -26,9 +26,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a10000skills.data.SkillEntity;
-import com.example.a10000skills.viewmodel.MainViewModel;
-import com.example.a10000skills.viewmodel.MainViewModelFactory;
+import com.alexandr7035.skills10000.data.SkillEntity;
+import com.alexandr7035.skills10000.viewmodel.MainViewModel;
+import com.alexandr7035.skills10000.viewmodel.MainViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

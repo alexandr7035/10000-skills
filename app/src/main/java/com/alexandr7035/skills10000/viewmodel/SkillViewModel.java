@@ -1,15 +1,12 @@
-package com.example.a10000skills.viewmodel;
+package com.alexandr7035.skills10000.viewmodel;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.a10000skills.data.SkillEntity;
-import com.example.a10000skills.data.SkillsRepository;
-
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import com.alexandr7035.skills10000.data.SkillEntity;
+import com.alexandr7035.skills10000.data.SkillsRepository;
 
 public class SkillViewModel extends ViewModel {
 

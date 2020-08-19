@@ -1,4 +1,4 @@
-package com.example.a10000skills.viewmodel;
+package com.alexandr7035.skills10000.viewmodel;
 
 import android.app.Application;
 
@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.a10000skills.data.SkillEntity;
-import com.example.a10000skills.data.SkillsRepository;
+import com.alexandr7035.skills10000.data.SkillEntity;
+import com.alexandr7035.skills10000.data.SkillsRepository;
 
 import java.util.ArrayList;
 import java.util.List;

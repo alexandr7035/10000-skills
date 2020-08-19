@@ -1,4 +1,4 @@
-package com.example.a10000skills.viewmodel;
+package com.alexandr7035.skills10000.viewmodel;
 
 import android.app.Application;
 
