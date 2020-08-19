@@ -1,4 +1,4 @@
-package com.example.a10000skills;
+package com.alexandr7035.skills10000;
 
 import org.junit.Test;
 

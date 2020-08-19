@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">10000 Skills</string>
+    <string name="app_name">10000 skills</string>
+    <string name="maim_title">10000 skills</string>
+
+    <!--string name="maim_title">%1$s skills</string> -->
+
+    <string name="menu_edit_skill_title">Изменить название</string>
+    <string name="edit_skill_title_hint_text">Название</string>
+
+    <string name="new_skill_dialog_create">Создать</string>
+    <string name="new_skill_dialog_cancel">Отмена</string>
+    <string name="new_skill_dialog_hint">Название</string>
+
+    <string name="delete_skill_dialog_delete">Удалить</string>
+    <string name="delete_skill_dialog_cancel">Отмена</string>
+    <string name="delete_skill_dialog_text"><![CDATA[<b>Удалить выделенные навыки?</b> (%1$d)]]></string>
+
+    <string name="delete_skills_bar_text">Навыки удалены [%1$d]</string>
+
 </resources>
