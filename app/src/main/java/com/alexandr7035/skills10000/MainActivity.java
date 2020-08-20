@@ -11,6 +11,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -33,7 +35,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+                          implements Toolbar.OnMenuItemClickListener {
 
     private RecyclerView recyclerView;
     private SkillsRecyclerViewAdapter recyclerViewAdapter;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private MutableLiveData<List<SkillEntity>> selectedSkillsLData;
 
     private TextView titleView;
+    private Toolbar toolbar;
 
     private FloatingActionButton addSkillBtn;
     private FloatingActionButton deleteSkillsBtn;
@@ -77,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Views
         titleView = findViewById(R.id.toolbarTitleView);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.toolbar_menu_main_activity);
         addSkillBtn = findViewById(R.id.addSkillBtn);
         deleteSkillsBtn = findViewById(R.id.deleteSkillsBtn);
         deleteSkillsBtn.hide();
@@ -340,6 +346,20 @@ public class MainActivity extends AppCompatActivity {
         else {
             super.onBackPressed();
         }
+    }
+
+
+    // Handler for toolbar menu
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                //Intent intent = new Intent(MainActivity.this, SkillActivity.class);
+                //startActivity(intent);
+        }
+
+        return false;
     }
 
 
