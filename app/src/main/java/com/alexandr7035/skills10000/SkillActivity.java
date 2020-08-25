@@ -24,14 +24,11 @@ import com.alexandr7035.skills10000.viewmodel.SkillViewModelFactory;
 public class SkillActivity extends AppCompatActivity
                             implements Toolbar.OnMenuItemClickListener {
 
-    private Toolbar toolbar;
     private TextView toolbarTitle;
     private TextView skillHoursView;
     private EditText editTitleView;
 
     private SkillViewModel viewModel;
-
-    private int skill_id;
 
     private final String LOG_TAG = "DEBUG_10000";
 
@@ -45,7 +42,7 @@ public class SkillActivity extends AppCompatActivity
         setContentView(R.layout.activity_skill);
 
         // Views
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbarTitle);
         editTitleView = findViewById(R.id.toolbarEditTitleView);
         toolbar.inflateMenu(R.menu.toolbar_menu_skill_activity);
@@ -63,7 +60,7 @@ public class SkillActivity extends AppCompatActivity
 
         // Get skill id
         Intent intent = getIntent();
-        skill_id = intent.getIntExtra("REQUESTED_SKILL", 0);
+        int skill_id = intent.getIntExtra("REQUESTED_SKILL", 0);
         //Log.d(LOG_TAG, "requested skill " + skill_id);
 
         // ViewModel & Livedata

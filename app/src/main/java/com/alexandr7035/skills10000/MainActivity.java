@@ -38,15 +38,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
                           implements Toolbar.OnMenuItemClickListener {
 
-    private RecyclerView recyclerView;
     private SkillsRecyclerViewAdapter recyclerViewAdapter;
     private MainViewModel viewModel;
-    private LiveData<List<SkillEntity>> skillsListLiveData;
 
     private MutableLiveData<List<SkillEntity>> selectedSkillsLData;
-
-    private TextView titleView;
-    private Toolbar toolbar;
 
     private FloatingActionButton addSkillBtn;
     private FloatingActionButton deleteSkillsBtn;
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         defaultClickListener = new DefaultClickListener();
 
         // RecyclerView
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewAdapter = new SkillsRecyclerViewAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -80,8 +75,7 @@ public class MainActivity extends AppCompatActivity
         recyclerViewAdapter.setItemLongClickListener(defaultClickListener);
 
         // Views
-        titleView = findViewById(R.id.toolbarTitleView);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.toolbar_menu_main_activity);
         addSkillBtn = findViewById(R.id.addSkillBtn);
         deleteSkillsBtn = findViewById(R.id.deleteSkillsBtn);
@@ -90,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         // ViewModel & LiveData
         viewModel = new ViewModelProvider(this, new MainViewModelFactory(this.getApplication())).get(MainViewModel.class);
-        skillsListLiveData = viewModel.getSkills();
+        LiveData<List<SkillEntity>> skillsListLiveData = viewModel.getSkills();
 
         selectedSkillsLData = viewModel.getSelectedSkillsLData();
 
