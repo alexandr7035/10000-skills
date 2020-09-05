@@ -18,8 +18,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alexandr7035.skills10000.data.SkillEntity;
+import com.alexandr7035.skills10000.data.SkillStatHelper;
 import com.alexandr7035.skills10000.viewmodel.SkillViewModel;
 import com.alexandr7035.skills10000.viewmodel.SkillViewModelFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 
 public class SkillActivity extends AppCompatActivity
                             implements Toolbar.OnMenuItemClickListener {
@@ -30,11 +36,15 @@ public class SkillActivity extends AppCompatActivity
 
     private SkillViewModel viewModel;
 
+    private SkillStatHelper skillStatHelper;
+
     private final String LOG_TAG = "DEBUG_10000";
 
     private LiveData<SkillEntity> skill;
 
     private Vibrator vibrator;
+
+    private JSONObject statJSON;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +88,24 @@ public class SkillActivity extends AppCompatActivity
 
         // Vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        skillStatHelper = new SkillStatHelper("skill_" + skill_id + ".csv", this);
+
+        //debug_json();
+
+
+
+        // fixme
+        // Handle exception
+        try {
+            statJSON = new JSONObject(skillStatHelper.getStatFromFile());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.d(LOG_TAG, "stat " + statJSON.toString());
+
     }
 
 
@@ -136,6 +164,18 @@ public class SkillActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void debug_json() {
+
+
+        try {
+            skillStatHelper.writeStatToFile(String.valueOf(new JSONObject().put("123","456")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }
