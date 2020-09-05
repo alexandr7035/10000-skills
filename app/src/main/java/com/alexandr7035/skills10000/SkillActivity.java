@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -91,10 +92,6 @@ public class SkillActivity extends AppCompatActivity
 
         skillStatHelper = new SkillStatHelper("skill_" + skill_id + ".csv", this);
 
-        //debug_json();
-
-
-
         // fixme
         // Handle exception
         try {
@@ -115,6 +112,9 @@ public class SkillActivity extends AppCompatActivity
         long hours = skill_data.getSkillHours() + 1;
         skill_data.setSkillHours(hours);
         viewModel.updateSkill(skill_data);
+
+        updateStat(1);
+
     }
 
     public void onDecreaseHoursBtnClick(View v) {
@@ -129,7 +129,11 @@ public class SkillActivity extends AppCompatActivity
             long hours = skill_data.getSkillHours() - 1;
             skill_data.setSkillHours(hours);
             viewModel.updateSkill(skill_data);
+
         }
+
+        updateStat(-1);
+
     }
 
     @Override
@@ -166,6 +170,37 @@ public class SkillActivity extends AppCompatActivity
         }
     }
 
+
+    private void updateStat(int hoursChange) {
+
+        long date = System.currentTimeMillis() / 1000;
+
+        String dateStr = DateFormat.format("yyyyMMdd", date*1000).toString();
+
+        Log.d(LOG_TAG, "update stat " + dateStr);
+
+        try {
+            if (! statJSON.has(dateStr)) {
+                statJSON.put(dateStr, 0);
+            }
+            else {
+
+                int previousVal = (int) statJSON.get(dateStr);
+
+                statJSON.remove(dateStr);
+                statJSON.put(dateStr, previousVal + hoursChange);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d(LOG_TAG, "updated stat " + statJSON.toString());
+        skillStatHelper.writeStatToFile(statJSON.toString());
+
+    }
+
+
     private void debug_json() {
 
 
@@ -173,6 +208,7 @@ public class SkillActivity extends AppCompatActivity
             skillStatHelper.writeStatToFile(String.valueOf(new JSONObject().put("123","456")));
         } catch (JSONException e) {
             e.printStackTrace();
+
         }
 
 
