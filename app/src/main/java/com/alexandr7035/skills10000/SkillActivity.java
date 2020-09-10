@@ -200,18 +200,4 @@ public class SkillActivity extends AppCompatActivity
 
     }
 
-
-    private void debug_json() {
-
-
-        try {
-            skillStatHelper.writeStatToFile(String.valueOf(new JSONObject().put("123","456")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-        }
-
-
-    }
-
 }
