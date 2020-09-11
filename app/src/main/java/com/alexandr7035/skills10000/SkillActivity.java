@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 
 public class SkillActivity extends AppCompatActivity
                             implements Toolbar.OnMenuItemClickListener {
@@ -121,18 +122,40 @@ public class SkillActivity extends AppCompatActivity
         SkillEntity skill_data;
         skill_data = skill.getValue();
 
+        long curr_date = System.currentTimeMillis() / 1000;
+        String curr_date_str = DateFormat.format("yyyyMMdd", curr_date*1000).toString();
+        int today_hours = 0;
+
+        try {
+            today_hours = (Integer) statJSON.get(String.valueOf(curr_date_str));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.d(LOG_TAG, "today hours: " + today_hours);
+
+
         if (skill_data.getSkillHours() == 0) {
             // Hours can't be lower than 0
             vibrator.vibrate(100);
         }
+
+        if (today_hours == 0) {
+            // Hours can't be lower than 0
+            vibrator.vibrate(100);
+        }
+
         else {
             long hours = skill_data.getSkillHours() - 1;
             skill_data.setSkillHours(hours);
             viewModel.updateSkill(skill_data);
 
+            updateStat(-1);
         }
 
-        updateStat(-1);
+
 
     }
 
@@ -181,7 +204,7 @@ public class SkillActivity extends AppCompatActivity
 
         try {
             if (! statJSON.has(dateStr)) {
-                statJSON.put(dateStr, 0);
+                statJSON.put(dateStr, hoursChange);
             }
             else {
 
