@@ -34,13 +34,7 @@ public class SkillStatHelper {
 
         if (! new File(context.getFilesDir().getAbsolutePath() + File.separator + fileName).exists()) {
             Log.d(LOG_TAG, "file doesn't exist");
-            try {
-                writer = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-                writer.write("{}".getBytes());
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            writeStatToFile("{}");
         }
 
 
