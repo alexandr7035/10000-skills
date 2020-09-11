@@ -46,8 +46,6 @@ public class SkillActivity extends AppCompatActivity
 
     private Vibrator vibrator;
 
-    private JSONObject statJSON;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,17 +91,6 @@ public class SkillActivity extends AppCompatActivity
 
         skillStatHelper = new SkillStatHelper("skill_" + skill_id + ".csv", this);
 
-        // fixme
-        // Handle exception
-        try {
-            statJSON = new JSONObject(skillStatHelper.getStatFromFile());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        Log.d(LOG_TAG, "stat " + statJSON.toString());
-
     }
 
 
@@ -114,35 +101,21 @@ public class SkillActivity extends AppCompatActivity
         skill_data.setSkillHours(hours);
         viewModel.updateSkill(skill_data);
 
-        updateStat(1);
+        skillStatHelper.updateStat(1);
 
     }
 
     public void onDecreaseHoursBtnClick(View v) {
         SkillEntity skill_data;
         skill_data = skill.getValue();
-
-        long curr_date = System.currentTimeMillis() / 1000;
-        String curr_date_str = DateFormat.format("yyyyMMdd", curr_date*1000).toString();
-        int today_hours = 0;
-
-        try {
-            today_hours = (Integer) statJSON.get(String.valueOf(curr_date_str));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        Log.d(LOG_TAG, "today hours: " + today_hours);
-
+        
 
         if (skill_data.getSkillHours() == 0) {
             // Hours can't be lower than 0
             vibrator.vibrate(100);
         }
 
-        if (today_hours == 0) {
+        if (skillStatHelper.getTodayHours() == 0) {
             // Hours can't be lower than 0
             vibrator.vibrate(100);
         }
@@ -152,7 +125,7 @@ public class SkillActivity extends AppCompatActivity
             skill_data.setSkillHours(hours);
             viewModel.updateSkill(skill_data);
 
-            updateStat(-1);
+            skillStatHelper.updateStat(-1);
         }
 
 
@@ -193,34 +166,5 @@ public class SkillActivity extends AppCompatActivity
         }
     }
 
-
-    private void updateStat(int hoursChange) {
-
-        long date = System.currentTimeMillis() / 1000;
-
-        String dateStr = DateFormat.format("yyyyMMdd", date*1000).toString();
-
-        Log.d(LOG_TAG, "update stat " + dateStr);
-
-        try {
-            if (! statJSON.has(dateStr)) {
-                statJSON.put(dateStr, hoursChange);
-            }
-            else {
-
-                int previousVal = (int) statJSON.get(dateStr);
-
-                statJSON.remove(dateStr);
-                statJSON.put(dateStr, previousVal + hoursChange);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Log.d(LOG_TAG, "updated stat " + statJSON.toString());
-        skillStatHelper.writeStatToFile(statJSON.toString());
-
-    }
 
 }

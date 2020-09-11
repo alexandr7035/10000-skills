@@ -1,6 +1,7 @@
 package com.alexandr7035.skills10000.data;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -25,6 +26,8 @@ public class SkillStatHelper {
     private ExecutorService executor;
     private FileOutputStream writer;
 
+    private JSONObject statJSON;
+
     private final String LOG_TAG = "DEBUG_10000";
 
     public SkillStatHelper(String fileName, Context context) {
@@ -37,12 +40,18 @@ public class SkillStatHelper {
             writeStatToFile("{}");
         }
 
+        // Init json object
+        try {
+            statJSON = new JSONObject(getStatFromFile());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
 
     // Write JSON string to file
-    public void writeStatToFile(String json_str) {
+    private void writeStatToFile(String json_str) {
 
 
         try {
@@ -59,7 +68,7 @@ public class SkillStatHelper {
 
 
     // Load JSON string from file
-    public String getStatFromFile() {
+    private String getStatFromFile() {
 
         String stringData = "";
 
@@ -92,5 +101,51 @@ public class SkillStatHelper {
 
     }
 
+
+    public void updateStat(int hoursChange) {
+
+        long date = System.currentTimeMillis() / 1000;
+
+        String dateStr = DateFormat.format("yyyyMMdd", date*1000).toString();
+
+        Log.d(LOG_TAG, "update stat " + dateStr);
+
+        try {
+            if (! statJSON.has(dateStr)) {
+                statJSON.put(dateStr, hoursChange);
+            }
+            else {
+
+                int previousVal = (int) statJSON.get(dateStr);
+
+                statJSON.remove(dateStr);
+                statJSON.put(dateStr, previousVal + hoursChange);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d(LOG_TAG, "updated stat " + statJSON.toString());
+        writeStatToFile(statJSON.toString());
+
+    }
+
+
+    public int getTodayHours() {
+
+        long curr_date = System.currentTimeMillis() / 1000;
+        String curr_date_str = DateFormat.format("yyyyMMdd", curr_date*1000).toString();
+        int today_hours = 0;
+
+        try {
+            today_hours = (Integer) statJSON.get(String.valueOf(curr_date_str));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return today_hours;
+    }
 
 }
